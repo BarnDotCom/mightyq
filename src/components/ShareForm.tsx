@@ -119,6 +119,7 @@ export function ShareForm() {
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget; // capture before any await: React clears currentTarget afterwards
     setNotice(null);
     if (items.some((it) => it.status === "uploading")) {
       setNotice("Hang on — your files are still uploading.");
@@ -126,7 +127,7 @@ export function ShareForm() {
     }
     const token = await ensureSession();
     if (!token) return;
-    const fd = new FormData(e.currentTarget);
+    const fd = new FormData(form);
     fd.set("session", token);
     fd.set("files", JSON.stringify(items.filter((it) => it.status === "done" && it.result).map((it) => it.result)));
     startTransition(() => dispatch(fd));
