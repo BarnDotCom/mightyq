@@ -22,7 +22,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         if (!pathname.startsWith(`submissions/${session.id}/`)) throw new Error("Bad upload path.");
         const validUntil = Date.now() + 60 * 60 * 1000;
         const token = await issueSignedToken({
-          pathname: `submissions/${session.id}/*`,
+          pathname,
           operations: ["put"],
           validUntil,
           allowedContentTypes: ALLOWED_TYPES,
@@ -34,7 +34,6 @@ export async function POST(request: Request): Promise<NextResponse> {
             validUntil,
             allowedContentTypes: ALLOWED_TYPES,
             maximumSizeInBytes: MAX_FILE_BYTES,
-            addRandomSuffix: true,
           },
         };
       },

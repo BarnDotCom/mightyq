@@ -89,7 +89,7 @@ export function ShareForm() {
     await Promise.all(
       newItems.map(async (it) => {
         try {
-          const blob = await uploadPresigned(`submissions/${sessionId}/${safeName(it.file.name)}`, it.file, {
+          const blob = await uploadPresigned(`submissions/${sessionId}/${Math.random().toString(36).slice(2, 8)}-${safeName(it.file.name)}`, it.file, {
             access: "private",
             handleUploadUrl: "/api/upload",
             clientPayload: token,
