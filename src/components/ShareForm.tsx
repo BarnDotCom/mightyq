@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { upload } from "@vercel/blob/client";
+import { uploadPresigned } from "@vercel/blob/client";
 import { useActionState, useRef, useState, startTransition, type FormEvent } from "react";
 import { beginShareSession, submitShare, type FormState } from "@/app/actions";
 import { Captcha, captchaEnabled } from "./Captcha";
@@ -89,7 +89,7 @@ export function ShareForm() {
     await Promise.all(
       newItems.map(async (it) => {
         try {
-          const blob = await upload(`submissions/${sessionId}/${safeName(it.file.name)}`, it.file, {
+          const blob = await uploadPresigned(`submissions/${sessionId}/${safeName(it.file.name)}`, it.file, {
             access: "private",
             handleUploadUrl: "/api/upload",
             clientPayload: token,
