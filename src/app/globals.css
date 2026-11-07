@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+/*
+ * The Mighty Q — tokens from the Mighty Q design system (On Air theme).
+ * Source: https://claude.ai/artifact/Upj1gPSbohjvvGPjSb1Vp6 (project/tokens.json).
+ * Change a colour here and it changes everywhere.
+ */
+:root {
+  --ground: #080705;
+  --ground-raised: #14100c;
+  --panel: #1f1b17;
+  --ink: #e6d6b6;
+  --ink-bright: #f4eee0;
+  --ink-muted: #a39a8a;
+  --gold: #c4801e;
+  --gold-bright: #e8a840;
+  --red: #b02a1c;
+  --red-label: #e5503a;
+  --red-signal: #d6301f;
+  --oxblood: #902c1e;
+  --rust-display: #b0492f;
+  --rule: #a07a40;
+  --rule-red: #7a2a1e;
+  --line-dim: #2a221a;
+  --line-mid: #3a2f22;
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-ground-raised: var(--ground-raised);
+  --color-panel: var(--panel);
+  --color-ink: var(--ink);
+  --color-ink-bright: var(--ink-bright);
+  --color-ink-muted: var(--ink-muted);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-red: var(--red);
+  --color-red-label: var(--red-label);
+  --color-red-signal: var(--red-signal);
+  --color-oxblood: var(--oxblood);
+  --color-rust: var(--rust-display);
+  --color-rule: var(--rule);
+  --color-rule-red: var(--rule-red);
+  --color-line-dim: var(--line-dim);
+  --color-line-mid: var(--line-mid);
+
+  --font-display: var(--font-ultra), "Clarendon URW", Georgia, serif;
+  --font-wood: var(--font-rokkitt), "Arial Narrow", serif;
+  --font-condensed: var(--font-oswald), "Arial Narrow", sans-serif;
+  --font-narrow: var(--font-archivo-narrow), "Arial Narrow", sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, serif;
+  --font-mono: var(--font-courier-prime), "Courier New", monospace;
+}
+
+html {
+  background: var(--ground);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-narrow);
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  a {
+    color: var(--gold-bright);
+  }
+  a:hover {
+    color: var(--ink-bright);
+  }
+  :focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+}
+
+/* Amber and rust glows on near-black, from the deck's texture notes. */
+.mq-glow {
+  background:
+    radial-gradient(60% 70% at 78% 30%, rgba(196, 128, 30, 0.16), rgba(8, 7, 5, 0) 70%),
+    radial-gradient(40% 50% at 10% 90%, rgba(144, 44, 30, 0.14), rgba(8, 7, 5, 0) 70%),
+    var(--ground);
+}
+
+/* The star rule: a bronze hairline broken by a gold star. */
+.mq-star {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gold);
+  font-size: 16px;
+  line-height: 1;
+}
+.mq-star::before,
+.mq-star::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--rule);
+}
+
+.mq-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px;
+  background: var(--ground);
+  border: 1px solid var(--rule);
+  border-radius: 0;
+  color: var(--ink-bright);
+  font-family: var(--font-narrow);
+  font-size: 18px;
+}
+.mq-input::placeholder {
+  color: var(--ink-muted);
+}
+textarea.mq-input {
+  min-height: 168px;
+  padding: 14px 16px;
+  line-height: 1.5;
+  resize: vertical;
+}
+select.mq-input {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+    linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+  background-position:
+    calc(100% - 22px) 23px,
+    calc(100% - 16px) 23px;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 44px;
+}
+
+.mq-check {
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  accent-color: var(--gold);
+  flex: none;
+}
+
+.sr-only-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Rich text from Sanity (privacy, terms). */
+.mq-prose {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.mq-prose h2 {
+  font-family: var(--font-wood);
+  font-weight: 800;
+  font-size: 26px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  margin: 2em 0 0.5em;
+}
+.mq-prose p,
+.mq-prose ul {
+  margin: 0 0 1em;
+}
+.mq-prose ul {
+  padding-left: 1.2em;
+  list-style: disc;
+}
