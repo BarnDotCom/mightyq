@@ -167,7 +167,7 @@ export function ShareForm() {
     <form onSubmit={onSubmit} className="flex min-w-0 flex-col gap-6" noValidate={false}>
       <label className="sr-only-field" aria-hidden="true">
         Leave this empty
-        <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+        <input type="text" name="mq_trap" tabIndex={-1} autoComplete="off" data-1p-ignore="true" data-lpignore="true" data-bwignore="true" data-form-type="other" />
       </label>
 
       {/* 1 */}

@@ -25,7 +25,10 @@ const GENERIC_ERROR = "Something went wrong on our end. Please try again, or wri
 
 export async function subscribe(_prev: FormState, formData: FormData): Promise<FormState> {
   // Honeypot: real people never fill this in.
-  if (formData.get("website")) return { ok: true, message: "Thanks! Check your email to confirm." };
+  if (formData.get("mq_trap")) {
+    console.warn("signup trapped by honeypot", String(formData.get("email") || "").slice(0, 80));
+    return { ok: true, message: "Thanks! Check your email to confirm." };
+  }
 
   const email = String(formData.get("email") || "").trim();
   const consent = formData.get("consent") === "on";
@@ -144,7 +147,10 @@ const shareSchema = z.object({
 });
 
 export async function submitShare(_prev: FormState, formData: FormData): Promise<FormState> {
-  if (formData.get("website")) return { ok: true, message: "Thank you!", ref: "MQ-0000" };
+  if (formData.get("mq_trap")) {
+    console.warn("submission trapped by honeypot", String(formData.get("email") || "").slice(0, 80));
+    return { ok: true, message: "Thank you!", ref: "MQ-0000" };
+  }
 
   const session = readUploadSession(String(formData.get("session") || ""));
   if (!session) return { ok: false, message: "Your session expired. Please reload the page and try again (your files may need re-adding)." };

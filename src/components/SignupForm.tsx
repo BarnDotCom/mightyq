@@ -30,7 +30,7 @@ export function SignupForm({ heading, text, senderLine }: { heading: string; tex
           <input type="hidden" name="source" value="home" />
           <label className="sr-only-field" aria-hidden="true">
             Leave this empty
-            <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+            <input type="text" name="mq_trap" tabIndex={-1} autoComplete="off" data-1p-ignore="true" data-lpignore="true" data-bwignore="true" data-form-type="other" />
           </label>
           <div className="flex flex-wrap gap-3">
             <label htmlFor="signup-email" className="sr-only">
